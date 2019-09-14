@@ -1,5 +1,7 @@
 package com.hampcode.model.repository;
 
-public class IProductRepository {
+import com.hampcode.model.entity.Product;
+
+public interface IProductRepository extends IRepository<Product>{
 
 }
