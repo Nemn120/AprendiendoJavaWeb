@@ -7,6 +7,6 @@ public interface IRepository<T> {
 	Long insert(T entity) throws Exception;
 	Long update(T entity) throws Exception;
 	List<T> findAll() throws Exception;
-	Optional<T> getOne(T entity) throws Exception;
+	Optional<T> findById(T entity) throws Exception;
 
 }
