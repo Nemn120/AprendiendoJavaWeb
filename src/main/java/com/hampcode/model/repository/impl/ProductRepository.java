@@ -1,5 +1,50 @@
 package com.hampcode.model.repository.impl;
 
-public class ProductRepository {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import com.hampcode.model.entity.Product;
+import com.hampcode.model.repository.IProductRepository;
+@Named
+public class ProductRepository implements IProductRepository, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@PersistenceContext(unitName="tallerPU")
+	private EntityManager em;
+	
+	@Override
+	public Long insert(Product entity) throws Exception {
+		em.persist(entity);
+		return entity.getId();
+	}
+
+	@Override
+	public Long update(Product entity) throws Exception {
+		em.merge(entity);
+		return entity.getId();
+	}
+
+	@Override
+	public List<Product> findAll() throws Exception {
+		List<Product> products = new ArrayList<Product>();
+		TypedQuery<Product> query=em.createQuery("SELECT p FROM Product p", Product.class);
+		products = query.getResultList();
+		return 		products;
+	}
+
+	@Override
+	public Optional<Product> findById(Product entity) throws Exception {
+		return null;
+	}
 
 }
